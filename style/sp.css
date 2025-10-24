@@ -1,0 +1,210 @@
+/* 全局背景 */
+
+body {
+  margin: 0;
+  font-family: "Microsoft YaHei", sans-serif;
+  background-image: url('../imges/back.jpg'); 
+  background-size: cover;       
+  background-repeat: no-repeat; 
+  background-position: center; 
+  background-attachment: fixed; 
+}
+
+/* 顶部导航栏 */
+.navbar {
+  background-color: #5091d3;    
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+}
+    .navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  margin-right: 20px;
+}
+.navbar a:hover {
+  color: #f1c40f;
+}
+.navbar img {
+  height: 50px; 
+  margin-right: 10px;
+}
+/* 主体内容 */
+.main {
+  margin-top: 50px;
+}
+/* 标题 */
+.title {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 36px;
+  color: #2c3e50;
+}
+.navbar img {
+  height: 50px; 
+  margin-right: 10px; /* 修正了这里的属性名 */
+}
+.navbar img {
+  height: 50px; 
+  margin-right: 10px; /* 修正了这里的属性名 */
+}
+.img-row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* 内容容器，半透明背景方便看文字 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.85); /* 半透明白色背景 */
+  border-radius: 10px;
+}
+
+/* 图片行 */
+.img-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+  float: left;
+}
+
+.img-row img {
+  width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.img-row img:hover {
+  transform: scale(1.05);
+}
+
+/* 顶部导航栏 */
+.top-bar {
+  background-color: rgba(26, 188, 156, 0.8);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* 下方菜单栏 */
+.menu {
+  display: flex;
+  background-color: #2c3e50;
+  position: sticky;
+  top: 50px; /* 顶部导航高度 */
+  z-index: 999;
+}
+
+.menu a {
+  flex: 1;
+  padding: 10px 0;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  border-right: 1px solid #3b4a5a;
+}
+
+.menu a:last-child {
+  border-right: none;
+}
+
+.menu a:hover {
+  background-color: #34495e;
+}
+
+@media (max-width: 600px) {
+  .img-row {
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 0;
+  }
+  .img-row img {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+.chapter-btn {
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.chapter-btn:hover {
+    background-color: #3498db;
+}
+/* 其他样式 */
+.title {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 32px;
+    color: #2c3e50;
+}
+.slides { width: 100% × 7; margin: 0 auto; }
+.slide { width: 100% ÷ 7; float: left; }
+
+div.content {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #ffffff;
+    font-size: 20px;
+    enable-background: #ffffff;
+}
+
+.content p {
+    margin-bottom: 10px;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.content h1 {
+    font-size: 32px;
+}
+
+.content h2 {
+    font-size: 28px;
+}
+
+.content h3 {
+    font-size: 24px;
+}
+
+.content h4 {
+    font-size: 20px;
+}
+
+.content h5 {
+    font-size: 16px;
+}
+
+.content h6 {
+    font-size: 14px;
+}
+
