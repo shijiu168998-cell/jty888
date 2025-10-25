@@ -33,6 +33,8 @@ git commit -m "🚀 自动更新网站 %date% %time%" --allow-empty
 echo 🌐 正在推送到 GitHub...
 git push -u origin main -f
 
+./upload.sh  # 或 git add . && git commit -m "fix image paths" && git push origin main
+
 echo ==========================================
 echo ✅ 上传完成！请稍等几分钟后访问：
 echo https://shijiu168998-cell.github.io/sp
