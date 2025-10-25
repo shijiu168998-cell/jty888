@@ -28,7 +28,7 @@ git push -u origin main
 
 echo ==========================================
 echo ✅ 上传完成！请稍等几分钟后访问：
-echo https://shijiu168998-cell.github.io/sp
+echo https://shijiu168998-cell.github.io/sp/
 echo ==========================================
 
 pause
