@@ -19,8 +19,8 @@ if not exist ".git" (
     git init
     git add .
     git commit -m "第一次提交网站文件"
-    git branch -M main
-    git remote add origin https://github.com/shijiu168998-cell/sp.git
+    git branch -main
+    git remote add origin https://github.com/shijiu168998-cell/sp/home.git
 )
 
 :: 如果已存在，则正常提交
@@ -35,7 +35,7 @@ git push -u origin main -f
 
 echo ==========================================
 echo ✅ 上传完成！请稍等几分钟后访问：
-echo https://shijiu168998-cell.github.io/sp/
+echo https://shijiu168998-cell.github.io/sp
 echo ==========================================
 
 pause
