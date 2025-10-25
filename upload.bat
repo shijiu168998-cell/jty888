@@ -18,7 +18,7 @@ if not exist ".git" (
     echo 🔧 检测到首次运行，正在初始化 Git...
     git init
     git branch -M main
-    git remote add origin https://github.com/shijiu168998-cell/sp-webiste.git
+    git remote add origin https://github.com/shijiu168998-cell/sp-website.git
     git add .
     git commit -m "第一次提交网站文件"
 )
@@ -32,8 +32,6 @@ git commit -m "🚀 自动更新网站 %date% %time%" --allow-empty
 
 echo 🌐 正在推送到 GitHub...
 git push -u origin main -f
-
-./upload.sh  # 或 git add . && git commit -m "fix image paths" && git push origin main
 
 echo ==========================================
 echo ✅ 上传完成！请稍等几分钟后访问：
