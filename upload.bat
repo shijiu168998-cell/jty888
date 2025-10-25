@@ -1,43 +1,67 @@
 @echo off
-title  一键上传网站到 GitHub
+title 九天一键上传网站到 GitHub（自动修复 + 图片路径处理）
 color 0a
 
 echo ==========================================
-echo     正在自动上传您的网站到 GitHub...
+echo 正在上传您的网站到 GitHub...
 echo ==========================================
 
 :: 切换到网站文件夹路径
 cd /d "C:\Users\ab\Desktop\sp"
 
-:: 设置 Git 用户信息（只需第一次）
-git config --global user.name "shijiu168998-cell"
-git config --global user.email "shijiu168998@gmail.com"
-
-:: 如果还没初始化 Git（首次运行）
+:: 初始化 Git（如果还没初始化）
 if not exist ".git" (
     echo 检测到首次运行，正在初始化 Git...
     git init
-    git branch -M main
-    git remote add origin https://github.com/shijiu168998-cell/sp-website.git
-    git add .
-    git commit -m "第一次提交网站文件"
 )
 
-gh repo clone shijiu168998-cell/sp
+git pull origin main --allow-unrelated-histories
 
-:: 添加文件并提交
-echo  正在添加文件...
+
+:: 添加远程仓库（先删除旧的）
+git remote remove origin >nul 2>&1
+git remote add origin https://github.com/shijiu168998-cell/sp.git
+
+:: 创建 main 分支
+git branch -M main
+
+:: ===============================
+:: 修复 HTML 中的图片路径大小写
+:: ===============================
+echo 正在修复 HTML 文件中的图片路径...
+for /r %%f in (*.html) do (
+    set "file=%%f"
+    call :FixImages "%%f"
+)
+
+:: 添加所有文件
 git add .
 
-echo  正在提交更改...
-git commit -m " 自动更新网站 %date% %time%" --allow-empty
+:: 提交更改（允许空提交）
+git commit -m "自动更新网站 %date% %time%" --allow-empty
 
-echo  正在推送到 GitHub...
+:: 上传到 GitHub
 git push -u origin main -f
 
 echo ==========================================
-echo ✅ 上传完成！请稍等几分钟后访问：
-echo https://shijiu168998-cell.github.io/sp
+echo 上传完成！
+echo 访问网址：https://shijiu168998-cell.github.io/sp/home.html
+
 echo ==========================================
 
 pause
+exit
+
+:: -------------------------------
+:FixImages
+setlocal enabledelayedexpansion
+set "htmlfile=%~1"
+:: 使用 PowerShell 修改 <img src="..."> 为小写路径
+powershell -Command "(Get-Content '%htmlfile%') -replace 'src\s*=\s*\"([^\"]+)\"','src=\"$([regex]::match($1,'.*').Value.ToLower())\"' | Set-Content '%htmlfile%'"
+endlocal
+goto :eof
+
+
+git add .
+git commit -m "创建 home 目录并添加主页"
+git push origin main

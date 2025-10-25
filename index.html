@@ -1,20 +1,214 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=主页.html">
-  <title>跳转中...</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>成年人的世界</title>
+
   <style>
     body {
-      background-color: #000;
-      color: #ff00ff;
+      margin: 0;
+      font-family: "Microsoft YaHei", sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
+    }
+
+    /* 顶部章节栏 */
+    .top-bar {
+      background: linear-gradient(90deg, #6a0dad, #ff00ff);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      text-shadow: 0 0 10px #ff00ff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 10px rgba(255,0,255,0.3);
+    }
+
+    .chapter-btn {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+      text-shadow: 0 0 5px #ff00ff;
+    }
+
+    .chapter-btn:hover {
+      background-color: rgba(255, 0, 255, 0.3);
+      box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff inset;
+      transform: scale(1.1);
+    }
+
+    /* 下方菜单栏 */
+    .menu {
+      display: flex;
+      background-color: #1a001a;
+      border-bottom: 2px solid #ff00ff;
+    }
+
+    .menu a {
+      flex: 1;
+      padding: 10px 0;
       text-align: center;
-      font-family: "Microsoft YaHei";
-      padding-top: 80px;
+      color: white;
+      text-decoration: none;
+      border-right: 1px solid #3b003b;
+      transition: all 0.3s;
+      text-shadow: 0 0 5px #ff00ff;
+    }
+
+    .menu a:last-child {
+      border-right: none;
+    }
+
+    .menu a:hover {
+      background: #340034;
+      box-shadow: 0 0 10px #ff00ff;
+      transform: scale(1.05);
+    }
+
+    /* 图片展示 */
+    .img-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      gap: 15px;
+    }
+
+    .img-row img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 5px #ff00ff;
+      cursor: pointer;
+    }
+
+    .img-row img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff inset;
+    }
+
+    /* 主体内容 */
+    .content {
+      padding: 20px;
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .content h2 {
+      font-size: 2.2em;
+      background: linear-gradient(90deg, #ff00ff, #6a0dad);
+      -webkit-background: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #6a0dad;
+      margin-bottom: 15px;
+    }
+
+    .content p {
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .content a {
+      color: #ff00ff;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-weight: bold;
+      text-shadow: 0 0 5px #ff00ff;
+    }
+
+    .content a:hover {
+      text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff inset;
+      transform: scale(1.05);
+    }
+
+    /* 广告图片 */
+    .content img.ad {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 10px;
+      animation: glow 2s infinite alternate;
+      box-shadow: 0 0 10px #ff00ff;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff inset; }
+      100% { box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff inset; }
+    }
+
+    /* 底部版权 */
+    .footer {
+      font-size: 12px;
+      color: #888;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* 响应式 */
+    @media(max-width:768px) {
+      .img-row img { width: 45%; height: auto; }
+      .menu a { font-size: 14px; }
+      .chapter-btn { padding: 5px 10px; font-size: 12px; }
     }
   </style>
 </head>
+
 <body>
-  <h2>🚀 正在跳转到主页面，请稍候...</h2>
+  <!-- 顶部章节栏 -->
+  <div class="top-bar">
+    <button class="chapter-btn" onclick="window.location.href='intro.html'">‹ 上一章</button>
+    <div style="font-weight: bold;">九天‘成年人的世界’网站</div>
+    <button class="chapter-btn" onclick="window.location.href='chapter2.html'">下一章 ›</button>
+  </div>
+
+  <!-- 菜单栏 -->
+  <div class="menu">
+    <a href="Home.html">图片</a>
+    <a href="https://jmcomic-zzz.one/albums/meiman">漫画</a>
+    <a href="https://drmgnyo.com/all/">缅甸小说</a>
+  </div>
+
+  <!-- 图片展示 -->
+  <div class="img-row"> <!-- 图片的路径需要修改 -->
+<img class="ad" src="images/1.jpg" alt="广告图片">
+    
+    <img src="images/2.jpg" alt="图片2">
+    <img src="images/3.jpg" alt="图片3">
+    <img src="images/4.jpg" alt="图片4">
+    <img src="images/5.jpg" alt="图片5">
+    <img src="images/8.jpg" alt="图片8">
+    <img src="images/7.jpg" alt="图片7">
+    <img src="images/9.jpg" alt="图片9">
+  </div>
+
+  <!-- 主体内容 -->
+  <div class="content">
+    <h2>欢迎来到 成年人的世界！</h2>
+    <p>这里是一个专门为成年人准备的网站，提供各种成人内容和资源。</p>
+    <p>比起你看视频更有趣哦~如果喜欢阅读小说的话，也可以去看看缅甸小说~</p>
+    <p>一个人看漫画或小说也不会寂寞的！看玩了分享身边的女性朋友一起看吧！</p>
+    <p>大家都是成年人，所以分享你身边最骚的女性朋友看看，然后开始和她互动。</p>
+    <p>如果有什么喜欢的或者想发送私人相片的可以联系我哦 </p>
+    <a href="https://t.me/jiutian19_97" target="_blank">联系主编</a>
+
+    <!-- 广告图片 -->
+    <img class="ad" src="imges/1.jpg" alt="广告图片">
+  </div>
+
+  <!-- 底部版权信息 -->
+  <div class="footer">
+    &copy; 2025 成年人的世界. 保留所有权利. 版权声明.
+  </div>
 </body>
 </html>
