@@ -18,7 +18,7 @@ if not exist ".git" (
     echo 🔧 检测到首次运行，正在初始化 Git...
     git init
     git branch -M main
-    git remote add origin https://github.com/shijiu168998-cell/sp-website.git
+    git remote add origin https://github.com/shijiu168998-cell/sp-home.html.git
     git add .
     git commit -m "第一次提交网站文件"
 )
