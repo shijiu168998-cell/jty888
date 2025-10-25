@@ -1,6 +1,8 @@
 @echo off
+chcp 65001 >nul
 title 🚀 九天一键修复并上传网站到 GitHub Pages
 color 0a
+
 
 echo ==========================================
 echo   🚀 正在修复并上传您的网站到 GitHub...
