@@ -33,7 +33,7 @@ git push -u origin main
 
 echo ==========================================
 echo ✅ 上传完成！
-echo 🌐 访问网址：https://shijiu168998-cell.github.io/sp-website/
+echo 🌐 访问网址：https://shijiu168998-cell.github.io/sp
 echo ==========================================
 
 pause
