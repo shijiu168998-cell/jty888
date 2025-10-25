@@ -38,5 +38,19 @@ git commit -m "🚀 自动修复并上传网站 %date% %time%" --allow-empty
 :: 推送到 GitHub
 git push -u origin main -f
 
+cd "C:\Users\ab\Desktop\sp"
+
+# 查看当前改动
+git status
+
+# 添加新文件和修改
+git add .
+
+# 提交
+git commit -m "添加老虎机页面 slots.html 并修改下一章按钮"
+
+# 推送到 GitHub
+git push origin main
+
 echo ========================================
 
