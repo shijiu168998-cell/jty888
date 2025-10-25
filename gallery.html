@@ -3,63 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>图片相册</title>
+<title>九天‘成年人娱乐’相册</title>
 <style>
-body {
-  margin: 0;
-  font-family: "Microsoft YaHei", sans-serif;
-  background-color: #0a0a0a;
-  color: #fff;
-}
-.header {
-  text-align: center;
-  padding: 20px;
-  font-size: 2em;
-  font-weight: bold;
-  color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
-}
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-  gap: 15px;
-}
-.gallery img {
-  width: 200px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.gallery img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff inset;
-}
+  body {
+    margin: 0;
+    font-family: "Microsoft YaHei", sans-serif;
+    background-color: #0a0a0a;
+    color: #fff;
+  }
+
+  /* 顶部章节栏 */
+  .top-bar {
+    background: linear-gradient(90deg, #6a0dad, #ff00ff);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff00ff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(255,0,255,0.3);
+  }
+  .chapter-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    text-shadow: 0 0 5px #ff00ff;
+  }
+  .chapter-btn:hover {
+    background-color: rgba(255, 0, 255, 0.3);
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff inset;
+    transform: scale(1.1);
+  }
+
+  /* 菜单栏 */
+  .menu {
+    display: flex;
+    background-color: #1a001a;
+    border-bottom: 2px solid #ff00ff;
+  }
+  .menu a {
+    flex: 1;
+    padding: 10px 0;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    border-right: 1px solid #3b003b;
+    transition: all 0.3s;
+    text-shadow: 0 0 5px #ff00ff;
+  }
+  .menu a:last-child { border-right: none; }
+  .menu a:hover {
+    background: #340034;
+    box-shadow: 0 0 10px #ff00ff;
+    transform: scale(1.05);
+  }
+
+  /* 相册 */
+  .gallery {
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 20px;
+    text-align: center;
+  }
+  .gallery img {
+    width: 100%;
+    max-height: 80vh;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+  }
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: #ff00ff;
+    background: rgba(0,0,0,0.5);
+    border: none;
+    padding: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .nav-left { left: 10px; }
+  .nav-right { right: 10px; }
+
+  /* 响应式 */
+  @media(max-width:768px) {
+    .chapter-btn { padding: 5px 10px; font-size: 12px; }
+    .menu a { font-size: 14px; }
+    .nav-btn { font-size: 1.5em; padding: 0 6px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="header">图片相册</div>
+<!-- 顶部章节栏 -->
+<div class="top-bar">
+  <button class="chapter-btn" onclick="window.location.href='Home.html'">‹ 主页</button>
+  <div>九天‘成年人娱乐’网站相册</div>
+  <button class="chapter-btn" onclick="window.location.href='JTY.html'">Slot注册 ›</button>
+</div>
 
-<div class="image">
-  <img src="images/1.jpg" alt="图片1" onclick="openImage(this.src)">
-  <img src="images/2.jpg" alt="图片2" onclick="openImage(this.src)">
-  <img src="images/3.jpg" alt="图片3" onclick="openImage(this.src)">
-  <img src="images/4.jpg" alt="图片4" onclick="openImage(this.src)">
-  <img src="images/5.jpg" alt="图片5" onclick="openImage(this.src)">
-  <img src="images/6.jpg" alt="图片6" onclick="openImage(this.src)">
-  <img src="images/7.jpg" alt="图片7" onclick="openImage(this.src)">
+<!-- 菜单栏 -->
+<div class="menu">
+  <a href="Home.html">图片</a>
+  <a href="https://jmcomic-zzz.one/albums/meiman">漫画</a>
+  <a href="https://drmgnyo.com/all/">缅甸小说</a>
+</div>
+
+<!-- 相册 -->
+<div class="gallery">
+  <button class="nav-btn nav-left" onclick="prevImage()">‹</button>
+  <img id="currentImg" src="images/1.jpg" alt="图片相册">
+  <button class="nav-btn nav-right" onclick="nextImage()">›</button>
 </div>
 
 <script>
-// 点击图片放大显示
-function openImage(src) {
-  const imgWindow = window.open("", "_blank");
-  imgWindow.document.write(`<img src="${src}" style="width:100%; height:auto; display:block; margin:auto; background:#000;">`);
+const images = [
+  "images/1.jpg",
+  "images/2.jpg",
+  "images/3.jpg",
+  "images/4.jpg",
+  "images/5.jpg",
+  "images/6.jpg"
+];
+
+let currentIndex = 0;
+
+function showImage(index) {
+  document.getElementById("currentImg").src = images[index];
 }
+
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  showImage(currentIndex);
+}
+
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  showImage(currentIndex);
+}
+
+// 自动轮播
+setInterval(nextImage, 3000);
 </script>
 
 </body>
