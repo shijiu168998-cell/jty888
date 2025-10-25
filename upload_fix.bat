@@ -17,7 +17,7 @@ if not exist ".git" (
 
 :: 添加远程仓库（如果还没添加）
 git remote remove origin >nul 2>&1
-git remote add origin https://github.com/shijiu168998-cell/sp-website.git
+git remote add origin https://github.com/shijiu168998-cell/sp-home.html.git
 
 :: 添加所有文件
 git add .
