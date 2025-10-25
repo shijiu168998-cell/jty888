@@ -47,7 +47,7 @@ git status
 git add .
 
 # 提交
-git commit -m "添加老虎机页面 slots.html 并修改下一章按钮"
+git commit -m "添加老虎机页面 JTY.html 并修改下一章按钮"
 
 # 推送到 GitHub
 git push origin main
