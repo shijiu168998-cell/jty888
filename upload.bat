@@ -1,9 +1,9 @@
 @echo off
-title 🚀 一键上传网站到 GitHub
+title  一键上传网站到 GitHub
 color 0a
 
 echo ==========================================
-echo    🚀 正在自动上传您的网站到 GitHub...
+echo     正在自动上传您的网站到 GitHub...
 echo ==========================================
 
 :: 切换到网站文件夹路径
@@ -15,7 +15,7 @@ git config --global user.email "shijiu168998@gmail.com"
 
 :: 如果还没初始化 Git（首次运行）
 if not exist ".git" (
-    echo 🔧 检测到首次运行，正在初始化 Git...
+    echo 检测到首次运行，正在初始化 Git...
     git init
     git branch -M main
     git remote add origin https://github.com/shijiu168998-cell/sp-website.git
@@ -24,13 +24,13 @@ if not exist ".git" (
 )
 
 :: 添加文件并提交
-echo 📦 正在添加文件...
+echo  正在添加文件...
 git add .
 
-echo 📝 正在提交更改...
-git commit -m "🚀 自动更新网站 %date% %time%" --allow-empty
+echo  正在提交更改...
+git commit -m " 自动更新网站 %date% %time%" --allow-empty
 
-echo 🌐 正在推送到 GitHub...
+echo  正在推送到 GitHub...
 git push -u origin main -f
 
 echo ==========================================
