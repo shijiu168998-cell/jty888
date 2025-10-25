@@ -1,164 +1,153 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>九天‘成年人娱乐’相册</title>
-<style>
-  body {
-    margin: 0;
-    font-family: "Microsoft YaHei", sans-serif;
-    background-color: #0a0a0a;
-    color: #fff;
-    overflow-x: hidden;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JT Online Game - 图片相册</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0014;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-  /* 顶部章节栏 */
-  .top-bar {
-    background: linear-gradient(90deg, #6a0dad, #ff00ff);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    font-weight: bold;
-    text-shadow: 0 0 10px #ff00ff;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 4px 10px rgba(255,0,255,0.3);
-  }
-  .chapter-btn {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 6px 14px;
-    cursor: pointer;
-    font-size: 14px;
-    text-shadow: 0 0 5px #ff00ff;
-  }
-  .chapter-btn:hover {
-    background-color: rgba(255, 0, 255, 0.3);
-    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff inset;
-    transform: scale(1.1);
-  }
+    /* 顶部栏 */
+    .header {
+      text-align: center;
+      padding: 15px;
+      font-size: 22px;
+      color: #d580ff;
+      font-weight: bold;
+      text-shadow: 0 0 8px #a040ff;
+      background: #120022;
+      border-bottom: 1px solid #3a0070;
+    }
 
-  /* 菜单栏 */
-  .menu {
-    display: flex;
-    background-color: #1a001a;
-    border-bottom: 2px solid #ff00ff;
-  }
-  .menu a {
-    flex: 1;
-    padding: 10px 0;
-    text-align: center;
-    color: white;
-    text-decoration: none;
-    border-right: 1px solid #3b003b;
-    transition: all 0.3s;
-    text-shadow: 0 0 5px #ff00ff;
-  }
-  .menu a:last-child { border-right: none; }
-  .menu a:hover {
-    background: #340034;
-    box-shadow: 0 0 10px #ff00ff;
-    transform: scale(1.05);
-  }
+    /* 菜单栏 */
+    .menu {
+      text-align: center;
+      background: #1a002e;
+      padding: 10px 0;
+      border-bottom: 2px solid #400080;
+    }
 
-  /* 相册 */
-  .gallery {
-    max-width: 100%;
-    overflow: hidden;
-    position: relative;
-    margin-top: 20px;
-    text-align: center;
-  }
-  .gallery img {
-    width: 100%;
-    height: auto;
-    max-height: 90vh;
-    border-radius: 10px;
-    object-fit: contain;
-    display: block;
-    margin: auto;
-    box-shadow: 0 0 20px rgba(255,0,255,0.3);
-  }
-  .nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2em;
-    color: #ff00ff;
-    background: rgba(0,0,0,0.5);
-    border: none;
-    padding: 0 10px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  .nav-left { left: 10px; }
-  .nav-right { right: 10px; }
+    .menu a {
+      color: #e0b3ff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
 
-  @media(max-width:768px) {
-    .chapter-btn { padding: 5px 10px; font-size: 12px; }
-    .menu a { font-size: 14px; }
-    .nav-btn { font-size: 1.5em; padding: 0 6px; }
-  }
-</style>
+    .menu a:hover {
+      color: #ffffff;
+      text-shadow: 0 0 10px #b366ff;
+    }
+
+    /* 相册区域 */
+    .gallery {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(160, 0, 255, 0.4);
+    }
+
+    .gallery img {
+      width: 100%;
+      display: none;
+      border-radius: 12px;
+    }
+
+    .gallery img.active {
+      display: block;
+      animation: fade 1s ease-in-out;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* 左右切换按钮 */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 24px;
+      background: rgba(80, 0, 160, 0.4);
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+
+    .prev:hover, .next:hover {
+      background: rgba(150, 0, 255, 0.7);
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+  </style>
 </head>
 <body>
 
-<!-- 顶部章节栏 -->
-<div class="top-bar">
-  <button class="chapter-btn" onclick="window.location.href='Home.html'">‹ 主页</button>
-  <div>九天‘成年人娱乐’网站相册</div>
-  <button class="chapter-btn" onclick="window.location.href='JTY.html'">Slot注册 ›</button>
-</div>
+  <div class="header">JT Online Game 相册</div>
 
-<!-- 菜单栏 -->
-<div class="menu">
-  <a href="Home.html">图片</a>
-  <a href="https://jmcomic-zzz.one/albums/meiman">漫画</a>
-  <a href="https://drmgnyo.com/all/">缅甸小说</a>
-</div>
+  <div class="menu">
+    <a href="Home.html">图片</a>
+    <a href="https://jmcomic-zzz.one/albums/meiman" target="_blank">漫画</a>
+    <a href="https://drmgnyo.com/all/" target="_blank">缅甸小说</a>
+  </div>
 
-<!-- 相册 -->
-<div class="gallery">
-  <button class="nav-btn nav-left" onclick="prevImage()">‹</button>
-  <img id="currentImg" src="images/1.jpg" alt="图片相册">
-  <button class="nav-btn nav-right" onclick="nextImage()">›</button>
-</div>
+  <div class="gallery" id="gallery">
+    <!-- 图片自动加载 -->
+  </div>
 
-<script>
-const images = [
-  "images/1.jpg",
-  "images/2.jpg",
-  "images/3.jpg",
-  "images/4.jpg",
-  "images/5.jpg",
-  "images/6.jpg"
-];
+  <script>
+    const totalImages = 71;
+    const gallery = document.getElementById("gallery");
 
-let currentIndex = 0;
+    // 生成所有图片
+    for (let i = 1; i <= totalImages; i++) {
+      const img = document.createElement("img");
+      img.src = `images/${i}.jpg`;
+      if (i === 1) img.classList.add("active");
+      gallery.appendChild(img);
+    }
 
-function showImage(index) {
-  const img = document.getElementById("currentImg");
-  img.src = images[index];
-}
+    const imgs = document.querySelectorAll(".gallery img");
+    let index = 0;
 
-function prevImage() {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  showImage(currentIndex);
-}
+    // 自动切换
+    function showNext() {
+      imgs[index].classList.remove("active");
+      index = (index + 1) % imgs.length;
+      imgs[index].classList.add("active");
+    }
 
-function nextImage() {
-  currentIndex = (currentIndex + 1) % images.length;
-  showImage(currentIndex);
-}
+    setInterval(showNext, 3000);
 
-// 自动轮播，每 3 秒切换
-setInterval(nextImage, 3000);
-</script>
+    // 手指滑动功能
+    let startX = 0;
+    gallery.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+    gallery.addEventListener("touchend", e => {
+      const endX = e.changedTouches[0].clientX;
+      if (endX - startX > 50) {
+        imgs[index].classList.remove("active");
+        index = (index - 1 + imgs.length) % imgs.length;
+        imgs[index].classList.add("active");
+      } else if (startX - endX > 50) {
+        showNext();
+      }
+    });
+  </script>
 
 </body>
 </html>
