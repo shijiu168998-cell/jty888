@@ -23,6 +23,8 @@ if not exist ".git" (
     git commit -m "第一次提交网站文件"
 )
 
+gh repo clone shijiu168998-cell/sp
+
 :: 添加文件并提交
 echo  正在添加文件...
 git add .
