@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 >nul
 title 🚀 自动上传网站到 GitHub
 color 0a
 
