@@ -17,18 +17,18 @@ git config --global user.email "shijiu168998@gmail.com"
 if not exist ".git" (
     echo 🔧 检测到首次运行，正在初始化 Git...
     git init
+    git branch -M main
+    git remote add origin https://github.com/shijiu168998-cell/sp-website.git
     git add .
     git commit -m "第一次提交网站文件"
-    git branch -main
-    git remote add origin https://github.com/shijiu168998-cell/sp/home.git
 )
 
-:: 如果已存在，则正常提交
+:: 添加文件并提交
 echo 📦 正在添加文件...
 git add .
 
 echo 📝 正在提交更改...
-git commit -m "🚀 自动更新网站 %date% %time%"
+git commit -m "🚀 自动更新网站 %date% %time%" --allow-empty
 
 echo 🌐 正在推送到 GitHub...
 git push -u origin main -f
