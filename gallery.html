@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图片相册</title>
+<style>
+body {
+  margin: 0;
+  font-family: "Microsoft YaHei", sans-serif;
+  background-color: #0a0a0a;
+  color: #fff;
+}
+.header {
+  text-align: center;
+  padding: 20px;
+  font-size: 2em;
+  font-weight: bold;
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 15px;
+}
+.gallery img {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.gallery img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff inset;
+}
+</style>
+</head>
+<body>
+
+<div class="header">图片相册</div>
+
+<div class="image">
+  <img src="images/1.jpg" alt="图片1" onclick="openImage(this.src)">
+  <img src="images/2.jpg" alt="图片2" onclick="openImage(this.src)">
+  <img src="images/3.jpg" alt="图片3" onclick="openImage(this.src)">
+  <img src="images/4.jpg" alt="图片4" onclick="openImage(this.src)">
+  <img src="images/5.jpg" alt="图片5" onclick="openImage(this.src)">
+  <img src="images/6.jpg" alt="图片6" onclick="openImage(this.src)">
+  <img src="images/7.jpg" alt="图片7" onclick="openImage(this.src)">
+</div>
+
+<script>
+// 点击图片放大显示
+function openImage(src) {
+  const imgWindow = window.open("", "_blank");
+  imgWindow.document.write(`<img src="${src}" style="width:100%; height:auto; display:block; margin:auto; background:#000;">`);
+}
+</script>
+
+</body>
+</html>
