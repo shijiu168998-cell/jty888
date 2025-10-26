@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>后台管理 — Admin Dashboard</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1320; --muted:#9aa4b2; --accent:#7c3aed; --glass:rgba(255,255,255,0.04);
+      --radius:12px; --gap:16px; --text:#e6eef6;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--text);background:linear-gradient(180deg,#071021 0%, #071827 100%);}
+    a{color:inherit;text-decoration:none}
+
+    .app{display:grid;grid-template-columns:260px 1fr;min-height:100vh;gap:var(--gap)}
+
+    /* SIDEBAR */
+    .sidebar{background:linear-gradient(180deg, rgba(124,58,237,0.12), transparent);padding:22px;border-radius:18px;margin:18px;height:calc(100vh - 36px);position:sticky;top:18px}
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 6px 18px rgba(124,58,237,0.18)}
+    .brand h1{font-size:15px;margin:0}
+    .nav{margin-top:8px}
+    .nav a{display:flex;align-items:center;padding:10px 12px;border-radius:10px;color:var(--text);margin-bottom:6px}
+    .nav a.active{background:var(--glass);box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+    .nav a:hover{background:rgba(255,255,255,0.02)}
+
+    /* MAIN */
+    .main{padding:22px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+    .search{background:var(--card);padding:10px;border-radius:12px;display:flex;align-items:center;gap:8px;width:420px}
+    .search input{background:transparent;border:0;outline:none;color:var(--text);width:100%}
+    .actions{display:flex;align-items:center;gap:12px}
+    button{background:linear-gradient(90deg,var(--accent),#06b6d4);border:0;padding:10px 14px;border-radius:10px;color:white;cursor:pointer}
+
+    /* GRID */
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:16px}
+    .card{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:0 6px 26px rgba(2,6,23,0.6)}
+
+    /* KPI */
+    .kpis{display:flex;gap:12px}
+    .kpi{flex:1;padding:14px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)}
+    .kpi h3{margin:0;font-size:13px;color:var(--muted)}
+    .kpi p{margin:8px 0 0;font-size:20px;font-weight:700}
+
+    /* Table */
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{padding:12px 10px;text-align:left;font-size:14px}
+    thead th{color:var(--muted);font-weight:600;font-size:13px}
+    tbody tr{border-top:1px solid rgba(255,255,255,0.03)}
+    .avatar{width:36px;height:36px;border-radius:8px;display:inline-block;vertical-align:middle;margin-right:8px;background:linear-gradient(45deg,#06b6d4,#7c3aed)}
+
+    /* right panel */
+    .small-list{display:flex;flex-direction:column;gap:12px}
+    .user-row{display:flex;align-items:center;gap:12px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .app{grid-template-columns:1fr}
+      .sidebar{height:auto;position:relative;margin:12px}
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center}
+    .modal{background:var(--card);padding:18px;border-radius:12px;width:540px;max-width:92%}
+    .form-row{display:flex;gap:10px}
+    .form-row input, .form-row select{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+    .muted{color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">JT</div>
+        <div>
+          <h1>JT 管理后台</h1>
+          <div class="muted">运营 · 仪表盘</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="active" href="#">仪表盘</a>
+        <a href="#">用户管理</a>
+        <a href="#">订单</a>
+        <a href="#">内容</a>
+        <a href="#">设置</a>
+      </nav>
+
+      <div style="margin-top:18px">
+        <div class="muted">当前版本</div>
+        <div style="margin-top:8px">v1.0.0</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-weight:700;font-size:18px">仪表盘</div>
+          <div class="muted">欢迎回来，管理员</div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="search card">
+            🔎 <input id="searchInput" placeholder="搜索用户、订单、内容..." />
+          </div>
+          <div class="actions">
+            <a herf= <button id="newBtn">新建</button></a>  
+            <div class="card" style="padding:10px;border-radius:10px;display:flex;gap:8px;align-items:center">
+              <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(45deg,#06b6d4,#7c3aed)"></div>
+              <div>
+                <div style="font-weight:700">管理员</div>
+                <div class="muted" style="font-size:12px">adminjty001</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="grid">
+        <div>
+          <div class="card kpis">
+            <div class="kpi">
+              <h3>今日活跃</h3>
+              <p id="kpi-active">1,234</p>
+            </div>
+            <div class="kpi">
+              <h3>新增用户</h3>
+              <p id="kpi-new">87</p>
+            </div>
+            <div class="kpi">
+              <h3>收入</h3>
+              <p id="kpi-rev">¥12,480</p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:700">用户列表</div>
+              <div class="muted">共 <span id="totalCount">6</span> 条</div>
+            </div>
+
+            <table id="userTable">
+              <thead>
+                <tr><th>用户</th><th>邮箱</th><th>状态</th><th>注册时间</th><th>操作</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="muted">显示 <span id="pageSize">6</span> 条</div>
+              <div>
+                <button id="prev">上一页</button>
+                <button id="next">下一页</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <div style="font-weight:700">系统信息</div>
+            <div class="muted" style="margin-top:6px">运行良好 · 无警告</div>
+
+            <div style="margin-top:12px" class="small-list">
+              <div class="user-row"><div style="flex:1"><div class="muted">服务器时间</div><div id="serverTime">-</div></div></div>
+              <div class="user-row"><div style="flex:1"><div class="muted">活跃会话</div><div id="sessions">42</div></div></div>
+              <div class="user-row"><div style="flex:1"><div class="muted">磁盘</div><div id="disk">128GB / 512GB</div></div></div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:700">最近操作</div>
+              <div class="muted">更多</div>
+            </div>
+
+            <ul style="margin-top:12px;padding-left:14px;color:var(--muted)">
+              <li>用户 张三 (zhangsan) 被创建</li>
+              <li>订单 #2312 已完成</li>
+              <li>配置更新：登录策略</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <!-- modal -->
+  <div id="modalBackdrop" class="modal-backdrop">
+    <div class="modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="font-weight:700">编辑用户</div>
+        <button id="closeModal" style="background:transparent;padding:6px;border-radius:8px">关闭</button>
+      </div>
+
+      <div class="form-row">
+        <input id="mName" placeholder="姓名" />
+        <input id="mEmail" placeholder="邮箱" />
+      </div>
+      <div style="margin-top:10px" class="form-row">
+        <select id="mRole"><option>普通用户</option><option>管理员</option><option>访客</option></select>
+        <select id="mStatus"><option>正常</option><option>封禁</option></select>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px;gap:8px">
+        <button id="saveBtn">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // sample data
+    const users = [
+      {id:1,name:'张三',email:'zhangsan@example.com',status:'正常',time:'2025-10-01'},
+      {id:2,name:'李四',email:'lisi@example.com',status:'正常',time:'2025-09-21'},
+      {id:3,name:'王五',email:'wangwu@example.com',status:'封禁',time:'2025-08-11'},
+      {id:4,name:'赵六',email:'zhaoliu@example.com',status:'正常',time:'2025-07-02'},
+      {id:5,name:'田七',email:'tianqi@example.com',status:'正常',time:'2025-06-10'},
+      {id:6,name:'孙八',email:'sunba@example.com',status:'正常',time:'2025-05-05'}
+    ];
+
+    let page = 0, pageSize = 6;
+    const tbody = document.querySelector('#userTable tbody');
+    const totalCount = document.getElementById('totalCount');
+    const serverTime = document.getElementById('serverTime');
+
+    function render(){
+      tbody.innerHTML='';
+      const start = page*pageSize;
+      const slice = users.slice(start,start+pageSize);
+      slice.forEach(u=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span class="avatar"></span>${u.name}</td>
+          <td>${u.email}</td>
+          <td>${u.status}</td>
+          <td>${u.time}</td>
+          <td><button data-id="${u.id}" class="edit">编辑</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      totalCount.textContent = users.length;
+      document.getElementById('pageSize').textContent = pageSize;
+    }
+
+    render();
+
+    document.getElementById('next').addEventListener('click',()=>{ if((page+1)*pageSize < users.length){ page++; render(); } });
+    document.getElementById('prev').addEventListener('click',()=>{ if(page>0){ page--; render(); } });
+
+    // modal
+    const modal = document.getElementById('modalBackdrop');
+    document.addEventListener('click',e=>{
+      if(e.target.matches('.edit')){
+        const id = Number(e.target.dataset.id);
+        const u = users.find(x=>x.id===id);
+        document.getElementById('mName').value = u.name;
+        document.getElementById('mEmail').value = u.email;
+        modal.style.display='flex';
+        modal.dataset.editId = id;
+      }
+    });
+    document.getElementById('closeModal').addEventListener('click', ()=> modal.style.display='none');
+    document.getElementById('saveBtn').addEventListener('click', ()=>{
+      const id = Number(modal.dataset.editId);
+      const u = users.find(x=>x.id===id);
+      u.name = document.getElementById('mName').value;
+      u.email = document.getElementById('mEmail').value;
+      modal.style.display='none'; render();
+    });
+
+    // search
+    document.getElementById('searchInput').addEventListener('input', e=>{
+      const q = e.target.value.trim().toLowerCase();
+      const filtered = users.filter(u=> u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q));
+      tbody.innerHTML='';
+      filtered.forEach(u=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span class="avatar"></span>${u.name}</td>
+          <td>${u.email}</td>
+          <td>${u.status}</td>
+          <td>${u.time}</td>
+          <td><button data-id="${u.id}" class="edit">编辑</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('totalCount').textContent = filtered.length;
+    });
+
+    // server time
+    function updateTime(){ serverTime.textContent = new Date().toLocaleString(); }
+    updateTime(); setInterval(updateTime,1000);
+
+    // new
+    document.getElementById('newBtn').addEventListener('click', ()=>{
+      const newId = users.length+1;
+      users.unshift({id:newId,name:'新用户'+newId,email:`user${newId}@example.com`,status:'正常',time:new Date().toISOString().slice(0,10)});
+      render();
+    });
+  </script>
+</body>
+</html>
