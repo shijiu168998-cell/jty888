@@ -18,4 +18,6 @@ echo ✅ 上传完成！
 echo 🌐 访问网址：https://shijiu168998-cell.github.io/sp/gallery.html
 echo ==========================================
 
+git 克隆 git://github.com/xdebug/xdebug.git
+
 pause
