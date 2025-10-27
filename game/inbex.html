@@ -1,229 +1,210 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
+<link rel="stylesheet" href="../sp/game/style/layout.css">
+
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>JTY-888 Slots Game</title>
+  <title>JTY Slots Platform</title>
   <style>
+    /* 🎨 全局风格 */
+    :root {
+      --bg: #0a0114;
+      --purple: #9c27ff;
+      --gold: #ffd700;
+      --text: #fff;
+      --gray: #888;
+    }
+
     body {
       margin: 0;
       font-family: "Microsoft YaHei", sans-serif;
-      background-color: #0a0114;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      background: radial-gradient(circle at top, #1a0033, #000);
+      color: var(--text);
       overflow-x: hidden;
     }
 
-    /* 顶部导航栏 */
+    /* 🌐 顶部导航 */
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      background: linear-gradient(90deg, #ff00cc, #8a2be2);
-      padding: 10px 25px;
-      height: 75px;
-      box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+      align-items: center;
+      padding: 15px 5%;
+      background: rgba(10, 0, 20, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 10;
     }
 
-    .logo img {
-      height: 50px;
-      width: auto;
-      object-fit: contain;
-      cursor: pointer;
-    }
-
-    .title {
-      flex: 1;
-      text-align: center;
-      font-size: 30px;
+    .logo {
+      font-size: 1.6rem;
       font-weight: bold;
-      color: #ffffff;
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-      letter-spacing: 1px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--purple);
     }
 
-    .right-section {
+    .user-area {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 15px;
     }
 
-    .actions button {
-      background: linear-gradient(180deg, #ffb3ff, #ff00ff);
+    .user-area span {
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      background: linear-gradient(90deg, var(--purple), var(--gold));
       color: #000;
       border: none;
-      padding: 6px 14px;
-      border-radius: 8px;
+      border-radius: 6px;
+      padding: 8px 14px;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+      transition: 0.3s;
     }
 
-    .actions button:hover {
+    .btn:hover {
+      opacity: 0.85;
       transform: scale(1.05);
-      background: linear-gradient(180deg, #ffffff, #ff66ff);
     }
 
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background-color: rgba(255, 255, 255, 0.08);
-      padding: 5px 10px;
-      border-radius: 8px;
+    /* 🌍 多语言切换 */
+    .lang {
+      background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+      color: white;
+      border-radius: 6px;
+      padding: 6px;
     }
 
-    .balance {
-      color: #ff99ff;
-      font-weight: bold;
-      font-size: 15px;
-    }
-
-    .menu-icon {
-      font-size: 22px;
-      color: #ffccff;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .menu-icon:hover {
-      transform: rotate(20deg);
-    }
-
-    /* 中间区域 */
-    main {
-      flex: 1;
-      background: url("sp/game/images/back.jpg") center/cover no-repeat;
+    /* 🎞️ Banner */
+    .banner {
+      margin-top: 10px;
+      background: url("https://images.unsplash.com/photo-1615312206496-60b1f2a4a5f2?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
+      height: 240px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      align-items: center;
-      padding: 40px 10px;
-      gap: 40px;
-      position: relative;
-    }
-
-    .box {
-      width: 90%;
-      max-width: 600px;
-      height: 150px;
-      background: rgba(50, 0, 70, 0.6);
-      border-radius: 20px;
-      border: 2px solid rgba(255, 0, 255, 0.4);
-      box-shadow: 0 0 25px rgba(255, 0, 255, 0.5);
-      backdrop-filter: blur(6px);
-    }
-
-    /* 底部导航栏 */
-    footer {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background: linear-gradient(90deg, #8a2be2, #ff00cc);
-      height: 60px;
-      box-shadow: 0 -3px 15px rgba(255, 0, 255, 0.3);
-      position: sticky;
-      bottom: 0;
-      z-index: 99;
-    }
-
-    .footer-item {
       text-align: center;
-      font-size: 13px;
-      color: #fff;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      color: white;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-shadow: 0 0 10px #000;
+    }
+
+    /* 🎮 游戏分类 */
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 30px 10%;
+    }
+
+    .game-card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      text-align: center;
+      padding: 20px;
+      transition: 0.3s;
       cursor: pointer;
-      transition: transform 0.2s ease, color 0.2s;
     }
 
-    .footer-item:hover {
-      transform: scale(1.1);
-      color: #ffe0ff;
+    .game-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--purple);
     }
 
-    @media (max-width: 768px) {
+    .game-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .game-card h3 {
+      margin: 10px 0 0;
+      font-size: 1rem;
+    }
+
+    /* 💬 帮助与客服 */
+    footer {
+      background: #100022;
+      padding: 20px 5%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--gray);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    /* 📱 响应式 */
+    @media (max-width: 600px) {
       header {
-        flex-wrap: wrap;
-        height: auto;
+        flex-direction: column;
+        gap: 10px;
       }
 
-      .title {
-        font-size: 24px;
-        width: 100%;
-        margin-top: 5px;
+      .banner {
+        font-size: 1.4rem;
+        height: 180px;
       }
 
-      .right-section {
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        width: 100%;
-      }
-
-      .actions button {
-        padding: 5px 10px;
-      }
-
-      .box {
-        height: 120px;
+      .games {
+        padding: 20px 5%;
       }
     }
   </style>
 </head>
+
 <body>
-
-  <!-- 顶部导航 -->
   <header>
-    <div class="logo" onclick="goHome()">
-      <img src="sp/game/images/logo.png" alt="Logo">
-    </div>
-
-    <div class="title">JTY-888 Slots Game</div>
-
-    <div class="right-section">
-      <div class="actions">
-        <button onclick="deposit()">存款</button>
-        <button onclick="withdraw()">提款</button>
-      </div>
-      <div class="user-info">
-        <div>abc</div>
-        <div class="balance">41232.25</div>
-        <div>MMK</div>
-      </div>
-      <div class="menu-icon" onclick="toggleMenu()">﴾﴾﴾</div>
+    <div class="logo">🎰 JTY Slots</div>
+    <div class="user-area">
+      <span> Welcome </span>
+      <p> JTY Slots</p>
+      <button class="btn">Login</button>
+      <button class="btn">Sign Up</button>
+      <select class="lang">
+        <option>中文</option>
+        <option>English</option>
+        <option>မြန်မာ</option>
+      </select>
     </div>
   </header>
 
-  <!-- 中间内容 -->
-  <main>
-    <div class="box"></div>
-    <div class="box"></div>
-  </main>
+  <div class="banner">💎 立即加入JTY Slots</div>
 
-  <!-- 底部导航 -->
+  <section class="games">
+    <div class="game-card">
+      <img src="../sp/game/images/pg.png" alt="PG Soft" />
+      <h3>PG Soft</h3>
+    </div>
+    <div class="game-card">
+      <img src="../sp/game/images/slot2.png" alt="Pragmatic Play" />
+      <h3>Pragmatic</h3>
+    </div>
+    <div class="game-card">
+      <img src="../sp/game/images/Slot.jpg" alt="JILI" />
+      <h3>JILI Slots</h3>
+    </div>
+    <div class="game-card">
+      <img src="../sp/game/images/slot1.png" alt="CQ9" />
+      <h3>CQ9 Gaming</h3>
+    </div>
+  </section>
+
   <footer>
-    <div class="footer-item" onclick="goHome()">🏠 首页</div>
-    <div class="footer-item" onclick="goGames()">🎮 游戏</div>
-    <div class="footer-item" onclick="goWallet()">💰 钱包</div>
-    <div class="footer-item" onclick="goProfile()">👤 我的</div>
+    <a href="jiutian395@gamil.com">帮助中心</a> |
+    <a href="@jiutian19_97">联系客服</a> |
+    <a href="#">关于我们</a>
+    <p style="margin-top:10px;">© 2025 JTY Slots Entertainment. All rights reserved.</p>
   </footer>
-
-  <script>
-    function goHome() { alert("跳转首页"); }
-    function deposit() { alert("打开存款页面"); }
-    function withdraw() { alert("打开提款页面"); }
-    function toggleMenu() { alert("打开菜单选项"); }
-    function goGames() { alert("进入游戏大厅"); }
-    function goWallet() { alert("打开钱包"); }
-    function goProfile() { alert("进入个人中心"); }
-  </script>
-
 </body>
+
 </html>
