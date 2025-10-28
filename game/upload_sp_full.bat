@@ -26,7 +26,7 @@ git push -u origin main -f
 echo ==========================================
 echo Upload complete!
 echo Website homepage: https://shijiu168998-cell.github.io/sp/
-echo Slots page: https://shijiu168998-cell.github.io/sp/JTY.html
+echo Slots page: https://shijiu168998-cell.github.io/sp/game/index.html
 echo ==========================================
 
 pause
