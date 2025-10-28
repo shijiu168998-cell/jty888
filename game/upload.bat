@@ -40,6 +40,10 @@ echo --------------------------------------------
 echo 🔄 同步远程仓库...
 git pull origin main --allow-unrelated-histories
 
+git add .
+git commit -m "fix commit lock error"
+git push -u origin main
+
 REM 推送到远程仓库
 echo --------------------------------------------
 echo 🚀 正在推送到 GitHub...
